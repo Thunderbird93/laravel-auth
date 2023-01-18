@@ -18,13 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
+
 Route::middleware(['auth', 'verified'])
-    ->name('admin.')
-    ->prefix('admin')
-    ->group(function(){
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    });
-    
+->name('admin.')
+->prefix('admin')
+->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+Route::resource('admin/projects', 'Admin\ProjectController');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
