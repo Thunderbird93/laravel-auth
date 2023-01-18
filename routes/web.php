@@ -26,9 +26,9 @@ Route::middleware(['auth', 'verified'])
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-Route::resource('admin/projects', 'Admin\ProjectController');
 
 Route::middleware('auth')->group(function () {
+    Route::resource('admin/projects', 'Admin\ProjectController');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
